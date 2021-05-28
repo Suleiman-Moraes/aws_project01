@@ -20,7 +20,7 @@ public class Product implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	@Column(length = 32, nullable = false)
@@ -32,7 +32,7 @@ public class Product implements Serializable {
 	@Column(length = 8, nullable = false)
 	private String code;
 
-	@Column(length = 12, nullable = false)
+	@Column(length = 12)
     private String color;
 
 	private Float price;

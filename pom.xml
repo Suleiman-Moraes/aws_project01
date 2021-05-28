@@ -24,7 +24,7 @@
 
 		<lombok.version>1.16.20</lombok.version>
 		<springfox-swagger.version>2.9.2</springfox-swagger.version>
-		<aws-java-sdk-sns.version>1.11.887</aws-java-sdk-sns.version>
+		<aws-java-sdk.version>1.11.887</aws-java-sdk.version>
 	</properties>
 
 	<dependencies>
@@ -72,7 +72,19 @@
 		<dependency>
 			<groupId>com.amazonaws</groupId>
 			<artifactId>aws-java-sdk-sns</artifactId>
-			<version>${aws-java-sdk-sns.version}</version>
+			<version>${aws-java-sdk.version}</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-sns -->
+		<dependency>
+			<groupId>com.amazonaws</groupId>
+			<artifactId>aws-java-sdk-sqs</artifactId>
+			<version>${aws-java-sdk.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.flywaydb</groupId>
+			<artifactId>flyway-core</artifactId>
 		</dependency>
 
 		<dependency>
