@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.amazonaws.services.sns.AmazonSNS;
+import com.amazonaws.services.sns.model.PublishResult;
 import com.amazonaws.services.sns.model.Topic;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -34,7 +35,9 @@ public class ProductPublish {
 			final ProductEvent productEvent = new ProductEvent(product.getId(), product.getCode(), username);
 			final Envelope envelope = Envelope.builder().eventType(eventType)
 					.data(objectMapper.writeValueAsString(productEvent)).build();
-			snsClient.publish(productEventsTopic.getTopicArn(), objectMapper.writeValueAsString(envelope));
+			final PublishResult publishResult = snsClient.publish(productEventsTopic.getTopicArn(),
+					objectMapper.writeValueAsString(envelope));
+			log.info("publishProcutcEvent - MessageId: {}", publishResult.getMessageId());
 		} catch (JsonProcessingException e) {
 			log.warn("publishProcutcEvent " + e.getMessage());
 		}

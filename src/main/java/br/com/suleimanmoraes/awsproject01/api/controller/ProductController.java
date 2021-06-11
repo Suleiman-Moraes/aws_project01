@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -46,12 +47,21 @@ public class ProductController {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
 		}
 	}
+	
+	@PostMapping("all")
+	public ResponseEntity<List<Product>> save(@RequestBody List<Product> products) throws URISyntaxException {
+		if(!CollectionUtils.isEmpty(products)) {
+			for(int i = 0; i < products.size(); i++) {
+				products.set(i, saveOne(products.get(i)));
+			}
+			return ResponseEntity.status(HttpStatus.CREATED).body(products);
+		}
+		return ResponseEntity.badRequest().body(null);
+	}
 
 	@PostMapping
 	public ResponseEntity<Product> save(@RequestBody Product product) throws URISyntaxException {
-		product = repository.save(product);
-		productPublish.publishProcutcEvent(product, EventType.CREATED, "João das Couve");
-		return ResponseEntity.status(HttpStatus.CREATED).body(product);
+		return ResponseEntity.status(HttpStatus.CREATED).body(saveOne(product));
 	}
 
 	@PutMapping("/{id}")
@@ -86,5 +96,11 @@ public class ProductController {
 		} else {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
 		}
+	}
+	
+	private Product saveOne(Product product) {
+		product = repository.save(product);
+		productPublish.publishProcutcEvent(product, EventType.CREATED, "João das Couve");
+		return product;
 	}
 }
