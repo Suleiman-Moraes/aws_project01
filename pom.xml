@@ -25,6 +25,7 @@
 		<lombok.version>1.16.20</lombok.version>
 		<springfox-swagger.version>2.9.2</springfox-swagger.version>
 		<aws-java-sdk.version>1.11.887</aws-java-sdk.version>
+		<amazon-sqs-java-messaging-lib.version>1.0.8</amazon-sqs-java-messaging-lib.version>
 	</properties>
 
 	<dependencies>
@@ -82,10 +83,29 @@
 			<version>${aws-java-sdk.version}</version>
 		</dependency>
 
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.flywaydb</groupId> -->
-<!-- 			<artifactId>flyway-core</artifactId> -->
-<!-- 		</dependency> -->
+		<dependency>
+			<groupId>com.amazonaws</groupId>
+			<artifactId>aws-java-sdk-s3</artifactId>
+			<version>${aws-java-sdk.version}</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/com.amazonaws/amazon-sqs-java-messaging-lib -->
+		<dependency>
+			<groupId>com.amazonaws</groupId>
+			<artifactId>amazon-sqs-java-messaging-lib</artifactId>
+			<version>${amazon-sqs-java-messaging-lib.version}</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-jms -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jms</artifactId>
+		</dependency>
+
+		<!-- <dependency> -->
+		<!-- <groupId>org.flywaydb</groupId> -->
+		<!-- <artifactId>flyway-core</artifactId> -->
+		<!-- </dependency> -->
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

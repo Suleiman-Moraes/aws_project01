@@ -24,5 +24,7 @@ public class ApiProperty {
 	public static class Aws {
 		private String region;
 		private String snsTopicProductEventsArn;
+		private String s3BucketInvoiceName;
+		private String sqsQueueInvoiceEventsName;
 	}
 }
